@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+.venv/
+/sproto_files/
+/output/
+/reference_output/
+/validation/
+*.log
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
