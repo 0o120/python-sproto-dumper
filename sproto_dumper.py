@@ -399,6 +399,9 @@ def index_sproto(schema: bytes) -> SchemaIndex:
         raise DumpError('Sproto type nesting is too deep') from exc
 
 
+_PROTOCOL_ALIGNMENT = ':------|------:|:------:|:------:|:------'
+
+
 def render_markdown(index: SchemaIndex, module: str, newline: bytes = b'\r\n') -> bytes:
     """Keep stable protocol names and compact request/response indicators."""
     protocol_count, type_count = len(index.protocols), len(index.types)
@@ -408,7 +411,7 @@ def render_markdown(index: SchemaIndex, module: str, newline: bytes = b'\r\n') -
         '## module', 'module|range|info|protocol sum|type sum',
         ':------:|:------:|:------:|:------:|:------:',
         f'{module}|`nil`|`nil`|{protocol_count}|{type_count}', '',
-        '## list', 'protocol|tag|request|response|md5', ':------:|:------:|:------:|:------:|:------:',
+        '## list', 'protocol|tag|request|response|md5', _PROTOCOL_ALIGNMENT,
     ]
 
     def endpoint_marker(name: Optional[str]) -> str:
@@ -447,8 +450,8 @@ def normalize_reference_markdown(data: bytes, protocol_hashes: dict[str, str]) -
         return row + b'|' + protocol_hashes[name].encode('ascii')
 
     data = re.sub(
-        rb'^(protocol\|tag\|request\|response)(\r?\n)(:------:\|:------:\|:------:\|:------:)(?=\r?$)',
-        lambda match: match[1] + b'|md5' + match[2] + match[3] + b'|:------:',
+        rb'^(protocol\|tag\|request\|response)(?:\|md5)?(\r?\n)(:?-{3,}:?(?:\|:?-{3,}:?){3,4})(?=\r?$)',
+        lambda match: match[1] + b'|md5' + match[2] + _PROTOCOL_ALIGNMENT.encode('ascii'),
         data, flags=re.MULTILINE,
     )
     return re.sub(

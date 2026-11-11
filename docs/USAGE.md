@@ -107,6 +107,7 @@ Schema bytes must match exactly. Markdown comparison accepts the current format
 and older indexes with linked names or explicit request/response type names.
 Those names are normalized to the current ✓ / — indicators. Missing MD5 columns
 are derived from the reference schema; existing MD5 values must match as written.
+Table alignment is normalized, so earlier centered indexes can still be used.
 References are read only, and a mismatch prevents writing the new output.
 
 To try the feature using the bundled example:

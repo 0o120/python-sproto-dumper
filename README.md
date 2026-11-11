@@ -81,6 +81,8 @@ The bundled [sample](examples/sample.lua) produces a protocol list like this:
 - **—** means it is absent or empty.
 - Protocols are sorted by numeric tag, with one row per source line.
 - Tables use plain Markdown, with no links or line-number anchors.
+- Protocol names and hashes are left-aligned, tags are right-aligned, and the
+  request/response indicators are centered.
 
 The index also includes protocol/type totals and a module summary. The `.sproto`
 file retains the full definitions, comments, indentation, and declaration order.

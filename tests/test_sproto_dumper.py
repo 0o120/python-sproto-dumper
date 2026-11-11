@@ -130,7 +130,7 @@ confirmation 5 { response nil }
             '## module\r\nmodule|range|info|protocol sum|type sum\r\n'
             ':------:|:------:|:------:|:------:|:------:\r\n'
             'test|`nil`|`nil`|1|1\r\n\r\n'
-            '## list\r\nprotocol|tag|request|response|md5\r\n:------:|:------:|:------:|:------:|:------:\r\n'
+            '## list\r\nprotocol|tag|request|response|md5\r\n:------|------:|:------:|:------:|:------\r\n'
             'get|4|✓|—|c903bfb47d9c1d347b5bc42b340457c4'
         ).encode('utf-8')
         self.assertEqual(render_markdown(index, 'test'), expected)
